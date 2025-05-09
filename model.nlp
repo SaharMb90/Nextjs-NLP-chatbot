@@ -1,0 +1,362 @@
+{
+  "settings": {
+    "languages": [
+      "en",
+      "fa"
+    ],
+    "forceNER": true,
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "en",
+      "fa"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "hello": {
+            "intent": "greetings.hello",
+            "domain": "default"
+          },
+          "hi": {
+            "intent": "greetings.hello",
+            "domain": "default"
+          },
+          "are,how,you": {
+            "intent": "greetings.howareyou",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "greetings.hello": "default",
+          "greetings.howareyou": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "hello",
+            "intent": "greetings.hello"
+          },
+          {
+            "domain": "default",
+            "utterance": "hi",
+            "intent": "greetings.hello"
+          },
+          {
+            "domain": "default",
+            "utterance": "how are you",
+            "intent": "greetings.howareyou"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "hello": 1,
+              "hi": 1,
+              "how": 1,
+              "are": 1,
+              "you": 1
+            },
+            "intents": {
+              "greetings.hello": 1,
+              "greetings.howareyou": 1
+            },
+            "intentFeatures": {
+              "greetings.hello": {
+                "hello": 1,
+                "hi": 1
+              },
+              "greetings.howareyou": {
+                "how": 1,
+                "are": 1,
+                "you": 1
+              }
+            },
+            "featuresToIntent": {
+              "hello": [
+                "greetings.hello"
+              ],
+              "hi": [
+                "greetings.hello"
+              ],
+              "how": [
+                "greetings.howareyou"
+              ],
+              "are": [
+                "greetings.howareyou"
+              ],
+              "you": [
+                "greetings.howareyou"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "hello",
+                "hi",
+                "how",
+                "are",
+                "you"
+              ],
+              "intents": [
+                "greetings.hello",
+                "greetings.howareyou"
+              ],
+              "perceptrons": [
+                [
+                  7.587271690368652,
+                  7.636037826538086,
+                  -2.167644739151001,
+                  -2.167644739151001,
+                  -2.167644739151001,
+                  6.540793874846079
+                ],
+                [
+                  -1.0853854417800903,
+                  -1.0738990306854248,
+                  4.388080596923828,
+                  4.388080596923828,
+                  4.388080596923828,
+                  1.1113591770804232
+                ]
+              ]
+            }
+          }
+        }
+      },
+      "fa": {
+        "settings": {
+          "locale": "fa",
+          "trainByDomain": false,
+          "tag": "domain-manager-fa",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "سلام": {
+            "intent": "greetings.hello",
+            "domain": "default"
+          },
+          "حالت,چطوره؟": {
+            "intent": "greetings.howareyou",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "greetings.hello": "default",
+          "greetings.howareyou": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "سلام",
+            "intent": "greetings.hello"
+          },
+          {
+            "domain": "default",
+            "utterance": "حالت چطوره؟",
+            "intent": "greetings.howareyou"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "fa",
+              "tag": "nlu-fa",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "سلام": 1,
+              "حالت": 1,
+              "چطوره؟": 1
+            },
+            "intents": {
+              "greetings.hello": 1,
+              "greetings.howareyou": 1
+            },
+            "intentFeatures": {
+              "greetings.hello": {
+                "سلام": 1
+              },
+              "greetings.howareyou": {
+                "حالت": 1,
+                "چطوره؟": 1
+              }
+            },
+            "featuresToIntent": {
+              "سلام": [
+                "greetings.hello"
+              ],
+              "حالت": [
+                "greetings.howareyou"
+              ],
+              "چطوره؟": [
+                "greetings.howareyou"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "fa",
+                "tag": "nlu-fa",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "سلام",
+                "حالت",
+                "چطوره؟"
+              ],
+              "intents": [
+                "greetings.hello",
+                "greetings.howareyou"
+              ],
+              "perceptrons": [
+                [
+                  10.087417602539062,
+                  -2.0022268295288086,
+                  -2.0022268295288086,
+                  4.047994996386096
+                ],
+                [
+                  -1.9969865083694458,
+                  6.107981204986572,
+                  6.107981204986572,
+                  2.0534609569587534
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "hello"
+      ],
+      [
+        "en",
+        "hi"
+      ],
+      [
+        "en",
+        "how are you"
+      ],
+      [
+        "fa",
+        "سلام"
+      ],
+      [
+        "fa",
+        "حالت چطوره؟"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "greetings.hello": [
+          {
+            "answer": "Hello there!"
+          }
+        ],
+        "greetings.howareyou": [
+          {
+            "answer": "I'm doing well, thank you!"
+          }
+        ]
+      },
+      "fa": {
+        "greetings.hello": [
+          {
+            "answer": "سلام! چطوری؟"
+          }
+        ],
+        "greetings.howareyou": [
+          {
+            "answer": "من خوبم، تو چطوری؟"
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}

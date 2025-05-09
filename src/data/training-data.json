@@ -1,0 +1,24 @@
+{
+    "en": {
+      "documents": [
+        { "text": "hello", "intent": "greetings.hello" },
+        { "text": "hi", "intent": "greetings.hello" },
+        { "text": "how are you", "intent": "greetings.howareyou" }
+      ],
+      "answers": {
+        "greetings.hello": "Hello there!",
+        "greetings.howareyou": "I'm doing well, thank you!"
+      }
+    },
+    "fa": {
+      "documents": [
+        { "text": "سلام", "intent": "greetings.hello" },
+        { "text": "حالت چطوره؟", "intent": "greetings.howareyou" }
+      ],
+      "answers": {
+        "greetings.hello": "سلام! چطوری؟",
+        "greetings.howareyou": "من خوبم، تو چطوری؟"
+      }
+    }
+  }
+  
