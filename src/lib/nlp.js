@@ -1,4 +1,7 @@
-const { NlpManager } = require('node-nlp');
+/* eslint-disable @typescript-eslint/no-require-imports */
+
+
+import { NlpManager } from 'node-nlp';
 const fs = require('fs');
 const path = require('path');
 
