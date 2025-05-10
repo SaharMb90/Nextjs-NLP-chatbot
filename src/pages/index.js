@@ -35,7 +35,12 @@ export default function Home() {
           <p><strong>Language:</strong> {response.lang}</p>
           <p><strong>Intent:</strong> {response.intent}</p>
           <p><strong>Answer:</strong> {response.answer}</p>
-          <p><strong>Sentiment:</strong> {response.sentiment.vote} ({response.sentiment.score})</p>
+          {response.sentiment ? (
+            <p><strong>Sentiment:</strong> {response.sentiment.vote} ({response.sentiment.score})</p>
+          ) : (
+            <p><strong>Sentiment:</strong> Not available</p>
+          )}
+
         </div>
       )}
     </div>
