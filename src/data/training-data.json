@@ -1,24 +1,62 @@
 {
-    "en": {
-      "documents": [
-        { "text": "hello", "intent": "greetings.hello" },
-        { "text": "hi", "intent": "greetings.hello" },
-        { "text": "how are you", "intent": "greetings.howareyou" }
-      ],
-      "answers": {
-        "greetings.hello": "Hello there!",
-        "greetings.howareyou": "I'm doing well, thank you!"
-      }
-    },
-    "fa": {
-      "documents": [
-        { "text": "سلام", "intent": "greetings.hello" },
-        { "text": "حالت چطوره؟", "intent": "greetings.howareyou" }
-      ],
-      "answers": {
-        "greetings.hello": "سلام! چطوری؟",
-        "greetings.howareyou": "من خوبم، تو چطوری؟"
-      }
+  "en": {
+    "documents": [
+      { "text": "hello", "intent": "greetings.hello" },
+      { "text": "hi", "intent": "greetings.hello" },
+      { "text": "hey there", "intent": "greetings.hello" },
+      { "text": "good morning", "intent": "greetings.hello" },
+      { "text": "how are you", "intent": "greetings.howareyou" },
+      { "text": "how's it going", "intent": "greetings.howareyou" },
+      { "text": "what's up", "intent": "greetings.howareyou" },
+      { "text": "bye", "intent": "greetings.bye" },
+      { "text": "goodbye", "intent": "greetings.bye" },
+      { "text": "see you later", "intent": "greetings.bye" },
+      { "text": "talk soon", "intent": "greetings.bye" },
+      { "text": "thanks", "intent": "gratitude.thanks" },
+      { "text": "thank you", "intent": "gratitude.thanks" },
+      { "text": "appreciate it", "intent": "gratitude.thanks" },
+      { "text": "what is your name", "intent": "bot.name" },
+      { "text": "who are you", "intent": "bot.name" },
+      { "text": "what can you do", "intent": "bot.help" },
+      { "text": "help me", "intent": "bot.help" },
+      { "text": "what do you do", "intent": "bot.help" }
+    ],
+    "answers": {
+      "greetings.hello": "Hello there! 👋",
+      "greetings.howareyou": "I'm doing well, thanks for asking!",
+      "greetings.bye": "Goodbye! Come back anytime.",
+      "gratitude.thanks": "You're very welcome.",
+      "bot.name": "I'm a small NLP.js demo bot — no fancy name yet.",
+      "bot.help": "I can recognize greetings, farewells, thanks, and a bit of small talk in English and Persian. Try me!"
+    }
+  },
+  "fa": {
+    "documents": [
+      { "text": "سلام", "intent": "greetings.hello" },
+      { "text": "درود", "intent": "greetings.hello" },
+      { "text": "سلام بر تو", "intent": "greetings.hello" },
+      { "text": "صبح بخیر", "intent": "greetings.hello" },
+      { "text": "حالت چطوره؟", "intent": "greetings.howareyou" },
+      { "text": "چه خبر؟", "intent": "greetings.howareyou" },
+      { "text": "اوضاع چطوره؟", "intent": "greetings.howareyou" },
+      { "text": "خداحافظ", "intent": "greetings.bye" },
+      { "text": "فعلا", "intent": "greetings.bye" },
+      { "text": "بعدا میبینمت", "intent": "greetings.bye" },
+      { "text": "ممنون", "intent": "gratitude.thanks" },
+      { "text": "متشکرم", "intent": "gratitude.thanks" },
+      { "text": "مرسی", "intent": "gratitude.thanks" },
+      { "text": "اسمت چیه؟", "intent": "bot.name" },
+      { "text": "تو کی هستی؟", "intent": "bot.name" },
+      { "text": "چیکار میتونی بکنی؟", "intent": "bot.help" },
+      { "text": "کمکم کن", "intent": "bot.help" }
+    ],
+    "answers": {
+      "greetings.hello": "سلام! چطوری؟",
+      "greetings.howareyou": "من خوبم، ممنون که پرسیدی!",
+      "greetings.bye": "خداحافظ! هر وقت خواستی برگرد.",
+      "gratitude.thanks": "خواهش می‌کنم.",
+      "bot.name": "من یک ربات نمونه‌ی NLP.js هستم، هنوز اسم خاصی ندارم.",
+      "bot.help": "می‌تونم سلام، خداحافظی، تشکر و کمی گفتگوی ساده رو به فارسی و انگلیسی تشخیص بدم."
     }
   }
-  
+}
