@@ -46,9 +46,8 @@ export async function trainNLP() {
     }
 
     await manager.train();
-    manager.save();
     trained = true;
-    console.log('NLP model trained and saved.');
+    console.log('NLP model trained (in-memory, not persisted to disk).');
   } catch (error) {
     console.error('Error during NLP training:', error);
     throw new Error('Failed to train NLP model');
