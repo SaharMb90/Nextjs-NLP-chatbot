@@ -1,12 +1,13 @@
 {
-  "name": "my-nlp-app",
+  "name": "campus-nlp-assistant",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "evaluate": "node scripts/evaluate.mjs"
   },
   "dependencies": {
     "next": "^16.2.9",

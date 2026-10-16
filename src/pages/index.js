@@ -1,61 +1,70 @@
 import { useState, useRef, useEffect } from 'react';
 
 const SUGGESTIONS = [
-  { label: 'hello', lang: 'en' },
-  { label: 'how are you', lang: 'en' },
-  { label: 'سلام', lang: 'fa' },
-  { label: 'چه خبر؟', lang: 'fa' },
+  { label: 'when is the library open', lang: 'en' },
+  { label: 'is the phd fully funded', lang: 'en' },
+  { label: 'what is the weather tomorrow', lang: 'en' },
+  { label: 'ددلاین اپلای کیه', lang: 'fa' },
+  { label: 'خیلی استرس دارم', lang: 'fa' },
 ];
 
-const SENTIMENT_STYLES = {
-  positive: { label: 'positive', color: '#4B7B62' },
-  negative: { label: 'negative', color: '#B3471F' },
-  neutral: { label: 'neutral', color: '#8A8478' },
+const DECISIONS = {
+  answer: { en: 'answered', fa: 'پاسخ داده شد', color: '#4B7B62', note: 'Confidence above the answer threshold and supported by matching words.' },
+  clarify: { en: 'asked to clarify', fa: 'درخواست توضیح', color: '#C2790A', note: 'Confidence between the two thresholds, so the user chooses.' },
+  abstain: { en: 'declined to guess', fa: 'حدس نزد', color: '#8A8478', note: 'Low confidence, or no word shared with any training example.' },
+  handoff: { en: 'referred to a person', fa: 'ارجاع به انسان', color: '#7A4FB5', note: 'Sensitive or explicit request for a human.' },
 };
 
 function isPersian(text) {
   return /[\u0600-\u06FF]/.test(text);
 }
 
-function sentimentBucket(score) {
-  if (score === undefined || score === null) return null;
-  if (score > 0.15) return 'positive';
-  if (score < -0.15) return 'negative';
-  return 'neutral';
-}
-
-function AnalysisSlip({ data }) {
-  const bucket = sentimentBucket(data?.sentiment?.score);
-  const confidence = data?.score ? Math.round(data.score * 100) : null;
+function AnalysisSlip({ data, onPick }) {
+  const d = DECISIONS[data.decision] || DECISIONS.abstain;
+  const showChoices = data.decision === 'clarify' && data.alternatives?.length > 0;
 
   return (
     <div className="slip">
       <div className="slip-row">
-        <span className="slip-key">intent</span>
-        <span className="slip-val">{data.intent || 'None'}</span>
+        <span className="slip-key">decision</span>
+        <span className="decision-chip" style={{ color: d.color, borderColor: d.color }}>
+          {data.lang === 'fa' ? d.fa : d.en}
+        </span>
       </div>
-      <div className="slip-row">
-        <span className="slip-key">lang</span>
-        <span className="slip-val">{data.lang}</span>
-      </div>
-      {confidence !== null && (
-        <div className="slip-row">
-          <span className="slip-key">confidence</span>
-          <div className="meter">
-            <div className="meter-fill" style={{ width: `${confidence}%` }} />
-          </div>
-          <span className="slip-val slip-num">{confidence}%</span>
+      <p className="slip-note">{data.confirmedByUser ? 'Topic chosen by the user.' : d.note}</p>
+
+      {data.alternatives?.length > 0 && (
+        <div className="alts">
+          {data.alternatives.map((a) => (
+            <div className="slip-row" key={a.intent}>
+              <span className="slip-key alt-label" title={a.intent}>{a.label}</span>
+              <div className="meter">
+                <div className="meter-fill" style={{ width: `${Math.round(a.score * 100)}%` }} />
+                <span className="tick" style={{ left: `${data.thresholds.clarify * 100}%` }} />
+                <span className="tick strong" style={{ left: `${data.thresholds.answer * 100}%` }} />
+              </div>
+              <span className="slip-val slip-num">{Math.round(a.score * 100)}%</span>
+            </div>
+          ))}
         </div>
       )}
-      {bucket && (
+
+      {!data.confirmedByUser && (
         <div className="slip-row">
-          <span className="slip-key">sentiment</span>
-          <span
-            className="sentiment-chip"
-            style={{ color: SENTIMENT_STYLES[bucket].color, borderColor: SENTIMENT_STYLES[bucket].color }}
-          >
-            {SENTIMENT_STYLES[bucket].label} · {data.sentiment.score.toFixed(2)}
+          <span className="slip-key">evidence</span>
+          <span className="slip-val">
+            {data.evidence?.length ? data.evidence.join(', ') : 'no shared words'}
           </span>
+        </div>
+      )}
+
+      {showChoices && (
+        <div className="choices">
+          {data.alternatives.map((a) => (
+            <button key={a.intent} className="chip" onClick={() => onPick(a.intent, data.lang)}>
+              {a.label}
+            </button>
+          ))}
         </div>
       )}
     </div>
@@ -83,20 +92,31 @@ export default function Home() {
     setLoading(true);
     setError(null);
 
+    await callEngine({ message: trimmed });
+  }
+
+  async function pickIntent(intent, lang) {
+    if (loading) return;
+    setLoading(true);
+    setError(null);
+    await callEngine({ confirmIntent: intent, lang });
+  }
+
+  async function callEngine(body) {
     try {
       const res = await fetch('/api/nlp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: trimmed }),
+        body: JSON.stringify(body),
       });
-      if (!res.ok) throw new Error('Request failed');
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `Server returned ${res.status}`);
       setMessages((prev) => [
         ...prev,
-        { id: Date.now() + 1, role: 'bot', text: data.answer || 'No match found.', data },
+        { id: Date.now() + 1, role: 'bot', text: data.answer, data },
       ]);
-    } catch {
-      setError("Couldn't reach the NLP engine. Is the dev server running?");
+    } catch (err) {
+      setError(`The engine did not respond: ${err.message}. Try again in a moment.`);
     } finally {
       setLoading(false);
     }
@@ -117,7 +137,7 @@ export default function Home() {
         body { background: #16140f; }
       `}</style>
 
-      <style jsx>{`
+      <style jsx global>{`
         .page {
           min-height: 100vh;
           display: flex;
@@ -138,14 +158,6 @@ export default function Home() {
           margin-bottom: 18px;
         }
 
-        .eyebrow {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 11px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: #C2956C;
-          margin: 0 0 6px;
-        }
 
         h1 {
           font-family: 'Fraunces', serif;
@@ -283,6 +295,22 @@ export default function Home() {
           background: #C2790A;
         }
 
+        .slip-note { margin: 2px 0 6px; color: #8A8167; font-size: 10.5px; line-height: 1.4; }
+        .alt-label { text-transform: none; letter-spacing: 0; width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .meter { position: relative; }
+        .tick { position: absolute; top: -2px; bottom: -2px; width: 1px; background: #8A8167; opacity: 0.5; }
+        .tick.strong { opacity: 1; background: #2A2620; }
+        .choices { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .choices .chip { background: #2A2620; color: #F6F1E4; border-color: #2A2620; font-size: 11px; }
+        .decision-chip {
+          border: 1px solid;
+          border-radius: 999px;
+          padding: 1px 8px;
+          font-size: 10.5px;
+          font-weight: 600;
+        }
+        .chip:focus-visible, .send-btn:focus-visible { outline: 2px solid #C2956C; outline-offset: 2px; }
+
         .sentiment-chip {
           border: 1px solid;
           border-radius: 999px;
@@ -377,11 +405,11 @@ export default function Home() {
       `}</style>
 
       <div className="header">
-        <p className="eyebrow">NLP.js · bilingual intent engine</p>
-        <h1>Two-language chat lab</h1>
+        <h1>A campus assistant that knows when it doesn't know</h1>
         <p className="subtitle">
-          Every reply prints an analysis slip below it — the detected intent, language,
-          confidence, and sentiment the model actually scored. Speak English or Persian.
+          Ask about the library, deadlines, fees, visas, housing, Wi-Fi, exams or funding, in
+          English or Persian. Each reply shows its decision: answer, ask you to choose, decline
+          to guess, or refer you to a person. The marks on each bar are the two thresholds.
         </p>
       </div>
 
@@ -389,7 +417,7 @@ export default function Home() {
         <div className="messages" ref={scrollRef}>
           {messages.length === 0 && (
             <div className="empty-state">
-              No messages yet — try a greeting below, in either language.
+              Try a question below, including one that is off-topic, to see the bot decline.
             </div>
           )}
 
@@ -398,7 +426,7 @@ export default function Home() {
             return (
               <div key={m.id} className={`row ${m.role}`}>
                 <div className={`bubble ${m.role} ${rtl ? 'rtl' : ''}`}>{m.text}</div>
-                {m.role === 'bot' && m.data && <AnalysisSlip data={m.data} />}
+                {m.role === 'bot' && m.data && <AnalysisSlip data={m.data} onPick={pickIntent} />}
               </div>
             );
           })}

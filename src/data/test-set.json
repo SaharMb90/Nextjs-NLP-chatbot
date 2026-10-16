@@ -1,0 +1,286 @@
+{
+ "en": [
+  {
+   "text": "hiya",
+   "intent": "greetings.hello"
+  },
+  {
+   "text": "morning!",
+   "intent": "greetings.hello"
+  },
+  {
+   "text": "ok bye then",
+   "intent": "greetings.bye"
+  },
+  {
+   "text": "thx",
+   "intent": "gratitude.thanks"
+  },
+  {
+   "text": "thanks for the help",
+   "intent": "gratitude.thanks"
+  },
+  {
+   "text": "are you a bot",
+   "intent": "bot.capabilities"
+  },
+  {
+   "text": "what can you help with",
+   "intent": "bot.capabilities"
+  },
+  {
+   "text": "is the library open late tonight",
+   "intent": "library.hours"
+  },
+  {
+   "text": "library times on saturday",
+   "intent": "library.hours"
+  },
+  {
+   "text": "when is the deadline for the cdt",
+   "intent": "admissions.deadline"
+  },
+  {
+   "text": "have phd applications closed",
+   "intent": "admissions.deadline"
+  },
+  {
+   "text": "how expensive is the masters",
+   "intent": "fees.tuition"
+  },
+  {
+   "text": "international tuition cost",
+   "intent": "fees.tuition"
+  },
+  {
+   "text": "what papers do i need for the visa",
+   "intent": "visa.student"
+  },
+  {
+   "text": "am i allowed to work while studying on a visa",
+   "intent": "visa.student"
+  },
+  {
+   "text": "any rooms available in student halls",
+   "intent": "accommodation.find"
+  },
+  {
+   "text": "need a place to live",
+   "intent": "accommodation.find"
+  },
+  {
+   "text": "eduroam keeps disconnecting",
+   "intent": "it.wifi"
+  },
+  {
+   "text": "locked out of my student account",
+   "intent": "it.wifi"
+  },
+  {
+   "text": "exam schedule",
+   "intent": "exams.timetable"
+  },
+  {
+   "text": "i was sick and missed the exam",
+   "intent": "exams.timetable"
+  },
+  {
+   "text": "how do i pick my modules",
+   "intent": "course.registration"
+  },
+  {
+   "text": "drop a module",
+   "intent": "course.registration"
+  },
+  {
+   "text": "is there a stipend for the phd",
+   "intent": "scholarship.funding"
+  },
+  {
+   "text": "funding for overseas students",
+   "intent": "scholarship.funding"
+  },
+  {
+   "text": "i'm so stressed i can't function",
+   "intent": "support.wellbeing"
+  },
+  {
+   "text": "i feel like i'm falling apart",
+   "intent": "support.wellbeing"
+  },
+  {
+   "text": "let me speak with someone from staff",
+   "intent": "human.handoff"
+  },
+  {
+   "text": "how do i contact student services",
+   "intent": "human.handoff"
+  },
+  {
+   "text": "what's the weather tomorrow",
+   "intent": null
+  },
+  {
+   "text": "recommend a good movie",
+   "intent": null
+  },
+  {
+   "text": "who won the football match",
+   "intent": null
+  },
+  {
+   "text": "write me a poem",
+   "intent": null
+  },
+  {
+   "text": "how do i cook rice",
+   "intent": null
+  },
+  {
+   "text": "what is the capital of france",
+   "intent": null
+  }
+ ],
+ "fa": [
+  {
+   "text": "سلام علیکم",
+   "intent": "greetings.hello"
+  },
+  {
+   "text": "وقتت بخیر",
+   "intent": "greetings.hello"
+  },
+  {
+   "text": "باشه خداحافظ",
+   "intent": "greetings.bye"
+  },
+  {
+   "text": "مرسی از کمکت",
+   "intent": "gratitude.thanks"
+  },
+  {
+   "text": "ممنون واقعاً",
+   "intent": "gratitude.thanks"
+  },
+  {
+   "text": "تو رباتی",
+   "intent": "bot.capabilities"
+  },
+  {
+   "text": "تو چه کمکی از دستت برمیاد",
+   "intent": "bot.capabilities"
+  },
+  {
+   "text": "کتابخانه امشب تا دیروقت بازه",
+   "intent": "library.hours"
+  },
+  {
+   "text": "ساعت کتابخانه شنبه",
+   "intent": "library.hours"
+  },
+  {
+   "text": "ددلاین سی دی تی کیه",
+   "intent": "admissions.deadline"
+  },
+  {
+   "text": "پذیرش دکترا بسته شده",
+   "intent": "admissions.deadline"
+  },
+  {
+   "text": "ارشد چقدر خرج داره",
+   "intent": "fees.tuition"
+  },
+  {
+   "text": "هزینه‌ی شهریه بین‌المللی",
+   "intent": "fees.tuition"
+  },
+  {
+   "text": "برای ویزا چه مدارکی می‌خوان",
+   "intent": "visa.student"
+  },
+  {
+   "text": "موقع تحصیل با ویزا اجازه‌ی کار دارم",
+   "intent": "visa.student"
+  },
+  {
+   "text": "اتاق خالی توی خوابگاه هست",
+   "intent": "accommodation.find"
+  },
+  {
+   "text": "دنبال جا برای زندگی هستم",
+   "intent": "accommodation.find"
+  },
+  {
+   "text": "ادوروم مدام قطع میشه",
+   "intent": "it.wifi"
+  },
+  {
+   "text": "حسابم قفل شده",
+   "intent": "it.wifi"
+  },
+  {
+   "text": "زمان‌بندی امتحانات",
+   "intent": "exams.timetable"
+  },
+  {
+   "text": "مریض بودم و امتحان رو از دست دادم",
+   "intent": "exams.timetable"
+  },
+  {
+   "text": "چطور درس‌هام رو انتخاب کنم",
+   "intent": "course.registration"
+  },
+  {
+   "text": "یه درس رو حذف کنم",
+   "intent": "course.registration"
+  },
+  {
+   "text": "دکترا استایپند داره",
+   "intent": "scholarship.funding"
+  },
+  {
+   "text": "فاند برای دانشجوی خارجی",
+   "intent": "scholarship.funding"
+  },
+  {
+   "text": "اونقدر استرس دارم که نمی‌تونم کاری کنم",
+   "intent": "support.wellbeing"
+  },
+  {
+   "text": "حس می‌کنم دارم از هم می‌پاشم",
+   "intent": "support.wellbeing"
+  },
+  {
+   "text": "بذار با یکی از کارمندها صحبت کنم",
+   "intent": "human.handoff"
+  },
+  {
+   "text": "چطور با خدمات دانشجویی تماس بگیرم",
+   "intent": "human.handoff"
+  },
+  {
+   "text": "هوای فردا چطوره",
+   "intent": null
+  },
+  {
+   "text": "یه فیلم خوب معرفی کن",
+   "intent": null
+  },
+  {
+   "text": "کی بازی فوتبال رو برد",
+   "intent": null
+  },
+  {
+   "text": "یه شعر برام بنویس",
+   "intent": null
+  },
+  {
+   "text": "برنج چطور بپزم",
+   "intent": null
+  },
+  {
+   "text": "پایتخت فرانسه کجاست",
+   "intent": null
+  }
+ ]
+}

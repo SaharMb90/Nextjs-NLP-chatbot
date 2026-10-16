@@ -1,62 +1,1049 @@
 {
-  "en": {
-    "documents": [
-      { "text": "hello", "intent": "greetings.hello" },
-      { "text": "hi", "intent": "greetings.hello" },
-      { "text": "hey there", "intent": "greetings.hello" },
-      { "text": "good morning", "intent": "greetings.hello" },
-      { "text": "how are you", "intent": "greetings.howareyou" },
-      { "text": "how's it going", "intent": "greetings.howareyou" },
-      { "text": "what's up", "intent": "greetings.howareyou" },
-      { "text": "bye", "intent": "greetings.bye" },
-      { "text": "goodbye", "intent": "greetings.bye" },
-      { "text": "see you later", "intent": "greetings.bye" },
-      { "text": "talk soon", "intent": "greetings.bye" },
-      { "text": "thanks", "intent": "gratitude.thanks" },
-      { "text": "thank you", "intent": "gratitude.thanks" },
-      { "text": "appreciate it", "intent": "gratitude.thanks" },
-      { "text": "what is your name", "intent": "bot.name" },
-      { "text": "who are you", "intent": "bot.name" },
-      { "text": "what can you do", "intent": "bot.help" },
-      { "text": "help me", "intent": "bot.help" },
-      { "text": "what do you do", "intent": "bot.help" }
-    ],
-    "answers": {
-      "greetings.hello": "Hello there! 👋",
-      "greetings.howareyou": "I'm doing well, thanks for asking!",
-      "greetings.bye": "Goodbye! Come back anytime.",
-      "gratitude.thanks": "You're very welcome.",
-      "bot.name": "I'm a small NLP.js demo bot — no fancy name yet.",
-      "bot.help": "I can recognize greetings, farewells, thanks, and a bit of small talk in English and Persian. Try me!"
-    }
+ "en": {
+  "documents": [
+   {
+    "text": "hello",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "hi",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "hey there",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "good morning",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "good afternoon",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "hi, anyone there?",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "hello assistant",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "hey",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "bye",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "goodbye",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "see you later",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "talk soon",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "that's all for now",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "i'm done, bye",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "catch you later",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "have a good day",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "thanks",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "thank you",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "appreciate it",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "thanks a lot",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "that helped, thanks",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "cheers",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "many thanks",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "thank you so much",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "what can you do",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "how can you help me",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "what do you know about",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "what topics can you answer",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "who are you",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "what are you",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "are you a human",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "help",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "when is the library open",
+    "intent": "library.hours"
+   },
+   {
+    "text": "library opening hours",
+    "intent": "library.hours"
+   },
+   {
+    "text": "what time does the library close",
+    "intent": "library.hours"
+   },
+   {
+    "text": "is the library open on weekends",
+    "intent": "library.hours"
+   },
+   {
+    "text": "can i study in the library at night",
+    "intent": "library.hours"
+   },
+   {
+    "text": "library hours during exams",
+    "intent": "library.hours"
+   },
+   {
+    "text": "is the library open today",
+    "intent": "library.hours"
+   },
+   {
+    "text": "when does the library open on sunday",
+    "intent": "library.hours"
+   },
+   {
+    "text": "what is the application deadline",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "when do applications close",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "last day to apply",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "deadline for phd applications",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "when is the masters deadline",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "is it too late to apply",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "when should i submit my application",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "application closing date",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "how much is tuition",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "what are the tuition fees",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "how much does the course cost",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "fees for international students",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "can i pay fees in instalments",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "when do i have to pay my fees",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "how do i pay tuition",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "is there an application fee",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "do i need a student visa",
+    "intent": "visa.student"
+   },
+   {
+    "text": "how do i apply for a student visa",
+    "intent": "visa.student"
+   },
+   {
+    "text": "what documents do i need for my visa",
+    "intent": "visa.student"
+   },
+   {
+    "text": "what is a cas",
+    "intent": "visa.student"
+   },
+   {
+    "text": "visa requirements for international students",
+    "intent": "visa.student"
+   },
+   {
+    "text": "how long does the visa take",
+    "intent": "visa.student"
+   },
+   {
+    "text": "can i work on a student visa",
+    "intent": "visa.student"
+   },
+   {
+    "text": "visa health surcharge",
+    "intent": "visa.student"
+   },
+   {
+    "text": "how do i find accommodation",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "is there student housing",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "can i get a room in halls",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "where can i live near campus",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "how much is student accommodation",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "apply for university housing",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "private renting advice",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "when do housing applications open",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "how do i connect to wifi",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "the wifi is not working",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "eduroam login",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "i forgot my password",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "reset my university password",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "can't log in to my account",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "internet is down on campus",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "set up my student email",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "when are my exams",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "where is the exam timetable",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "exam dates",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "what time is my exam",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "can i reschedule an exam",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "i missed my exam",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "exam room location",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "when are results released",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "how do i register for courses",
+    "intent": "course.registration"
+   },
+   {
+    "text": "choose my modules",
+    "intent": "course.registration"
+   },
+   {
+    "text": "add or drop a course",
+    "intent": "course.registration"
+   },
+   {
+    "text": "course selection deadline",
+    "intent": "course.registration"
+   },
+   {
+    "text": "can i change my course",
+    "intent": "course.registration"
+   },
+   {
+    "text": "enrol in classes",
+    "intent": "course.registration"
+   },
+   {
+    "text": "when is enrolment",
+    "intent": "course.registration"
+   },
+   {
+    "text": "which courses can i take",
+    "intent": "course.registration"
+   },
+   {
+    "text": "are there scholarships",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "how can i get funding",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "phd funding options",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "is the phd fully funded",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "stipend amount",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "scholarships for international students",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "how do i apply for a scholarship",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "do i get a stipend",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "i feel really stressed",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "i'm not coping",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "i feel anxious all the time",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "i'm struggling with my mental health",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "i feel overwhelmed and alone",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "i can't sleep because of stress",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "i need someone to talk to",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "everything feels too much",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "can i talk to a person",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "i want to speak to a human",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "connect me to staff",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "this isn't helping, get me someone",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "contact the student office",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "phone number for student services",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "email the help desk",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "real person please",
+    "intent": "human.handoff"
+   }
+  ],
+  "answers": {
+   "greetings.hello": "Hi! I can help with campus questions: library, deadlines, fees, visas, housing, IT, exams and funding. What do you need?",
+   "greetings.bye": "Bye! Come back any time.",
+   "gratitude.thanks": "You're welcome.",
+   "bot.capabilities": "I'm a small intent-based assistant, not a person and not a large language model. I recognise about a dozen campus topics in English and Persian. When I'm unsure I ask you to choose instead of guessing, and for personal or urgent matters I point you to a human.",
+   "library.hours": "Library hours change by term and are extended during exams. The library website lists today's hours and any closures.",
+   "admissions.deadline": "Deadlines differ by programme and by funding round. Check the programme's admissions page; funded places often close earlier than the general deadline.",
+   "fees.tuition": "Fees depend on the programme and your fee status (home or international). The fees page for your programme lists the amount and the instalment options.",
+   "visa.student": "Visa rules are set by the government and change, so I won't guess. The university's international student advice team can check your case; official guidance is on the government visa site.",
+   "accommodation.find": "The accommodation office handles university halls and has advice on private renting. Apply early; first-year and international students are often prioritised.",
+   "it.wifi": "For Wi-Fi use eduroam with your full university email and password. If your password fails, reset it on the IT self-service page or contact the IT helpdesk.",
+   "exams.timetable": "Your personal exam timetable is in the student portal. If you missed an exam or need to change one, contact your school office as soon as possible about special circumstances.",
+   "course.registration": "Course selection happens in the student portal during the enrolment window. Your programme handbook lists which courses you can take; your personal tutor can approve changes.",
+   "scholarship.funding": "Funding depends on the programme and your fee status. Check the scholarships search and the programme page, and confirm whether a place covers international fees before you apply.",
+   "support.wellbeing": "I'm sorry it feels like this. I'm a simple bot and not the right support, but people are: the university wellbeing service offers confidential appointments. If you feel unsafe right now, contact local emergency services.",
+   "human.handoff": "The student services desk can help directly; their contact details are on the student support page."
   },
-  "fa": {
-    "documents": [
-      { "text": "سلام", "intent": "greetings.hello" },
-      { "text": "درود", "intent": "greetings.hello" },
-      { "text": "سلام بر تو", "intent": "greetings.hello" },
-      { "text": "صبح بخیر", "intent": "greetings.hello" },
-      { "text": "حالت چطوره؟", "intent": "greetings.howareyou" },
-      { "text": "چه خبر؟", "intent": "greetings.howareyou" },
-      { "text": "اوضاع چطوره؟", "intent": "greetings.howareyou" },
-      { "text": "خداحافظ", "intent": "greetings.bye" },
-      { "text": "فعلا", "intent": "greetings.bye" },
-      { "text": "بعدا میبینمت", "intent": "greetings.bye" },
-      { "text": "ممنون", "intent": "gratitude.thanks" },
-      { "text": "متشکرم", "intent": "gratitude.thanks" },
-      { "text": "مرسی", "intent": "gratitude.thanks" },
-      { "text": "اسمت چیه؟", "intent": "bot.name" },
-      { "text": "تو کی هستی؟", "intent": "bot.name" },
-      { "text": "چیکار میتونی بکنی؟", "intent": "bot.help" },
-      { "text": "کمکم کن", "intent": "bot.help" }
-    ],
-    "answers": {
-      "greetings.hello": "سلام! چطوری؟",
-      "greetings.howareyou": "من خوبم، ممنون که پرسیدی!",
-      "greetings.bye": "خداحافظ! هر وقت خواستی برگرد.",
-      "gratitude.thanks": "خواهش می‌کنم.",
-      "bot.name": "من یک ربات نمونه‌ی NLP.js هستم، هنوز اسم خاصی ندارم.",
-      "bot.help": "می‌تونم سلام، خداحافظی، تشکر و کمی گفتگوی ساده رو به فارسی و انگلیسی تشخیص بدم."
-    }
+  "labels": {
+   "greetings.hello": "Greeting",
+   "greetings.bye": "Goodbye",
+   "gratitude.thanks": "Thanks",
+   "bot.capabilities": "What I can do",
+   "library.hours": "Library hours",
+   "admissions.deadline": "Application deadlines",
+   "fees.tuition": "Tuition fees",
+   "visa.student": "Student visa",
+   "accommodation.find": "Accommodation",
+   "it.wifi": "Wi-Fi and passwords",
+   "exams.timetable": "Exams",
+   "course.registration": "Course registration",
+   "scholarship.funding": "Scholarships and funding",
+   "support.wellbeing": "Wellbeing support",
+   "human.handoff": "Talk to a person"
   }
+ },
+ "fa": {
+  "documents": [
+   {
+    "text": "سلام",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "سلام وقت بخیر",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "درود",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "صبح بخیر",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "عصر بخیر",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "سلام کسی هست؟",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "سلام خسته نباشید",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "سلام دوست من",
+    "intent": "greetings.hello"
+   },
+   {
+    "text": "خداحافظ",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "فعلاً خداحافظ",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "بعداً می‌بینمت",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "همین بود ممنون خداحافظ",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "روز خوبی داشته باشی",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "فعلاً",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "بای",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "تا بعد",
+    "intent": "greetings.bye"
+   },
+   {
+    "text": "ممنون",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "مرسی",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "خیلی ممنون",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "دستت درد نکنه",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "سپاس",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "کمکم کرد ممنون",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "لطف کردی",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "ممنونم ازت",
+    "intent": "gratitude.thanks"
+   },
+   {
+    "text": "چه کارهایی بلدی",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "چطور می‌تونی کمکم کنی",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "در مورد چه چیزهایی می‌دونی",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "تو کی هستی",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "تو چی هستی",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "آدمی یا ربات",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "راهنمایی",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "به چه سؤال‌هایی جواب می‌دی",
+    "intent": "bot.capabilities"
+   },
+   {
+    "text": "کتابخانه کی بازه",
+    "intent": "library.hours"
+   },
+   {
+    "text": "ساعت کاری کتابخانه",
+    "intent": "library.hours"
+   },
+   {
+    "text": "کتابخانه چه ساعتی می‌بنده",
+    "intent": "library.hours"
+   },
+   {
+    "text": "کتابخانه آخر هفته بازه",
+    "intent": "library.hours"
+   },
+   {
+    "text": "شب‌ها میشه توی کتابخانه درس خوند",
+    "intent": "library.hours"
+   },
+   {
+    "text": "ساعت کتابخانه در ایام امتحانات",
+    "intent": "library.hours"
+   },
+   {
+    "text": "امروز کتابخانه بازه",
+    "intent": "library.hours"
+   },
+   {
+    "text": "کتابخانه یکشنبه‌ها ساعت چند باز میشه",
+    "intent": "library.hours"
+   },
+   {
+    "text": "ددلاین اپلای کیه",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "مهلت ثبت‌نام کی تموم میشه",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "آخرین روز برای درخواست",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "ددلاین دکترا کیه",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "مهلت اپلای ارشد کی هست",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "الان برای اپلای دیر شده",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "کی باید درخواستم رو بفرستم",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "تاریخ پایان پذیرش درخواست",
+    "intent": "admissions.deadline"
+   },
+   {
+    "text": "شهریه چقدره",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "هزینه‌ی تحصیل چقدر میشه",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "این دوره چقدر هزینه داره",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "شهریه دانشجوهای بین‌المللی",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "میشه شهریه رو قسطی داد",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "کی باید شهریه رو بپردازم",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "چطوری شهریه رو پرداخت کنم",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "هزینه‌ی درخواست داره",
+    "intent": "fees.tuition"
+   },
+   {
+    "text": "ویزای دانشجویی لازم دارم",
+    "intent": "visa.student"
+   },
+   {
+    "text": "چطور برای ویزای دانشجویی اقدام کنم",
+    "intent": "visa.student"
+   },
+   {
+    "text": "برای ویزا چه مدارکی لازمه",
+    "intent": "visa.student"
+   },
+   {
+    "text": "کس یا cas چیه",
+    "intent": "visa.student"
+   },
+   {
+    "text": "شرایط ویزا برای دانشجوهای خارجی",
+    "intent": "visa.student"
+   },
+   {
+    "text": "ویزا چقدر طول می‌کشه",
+    "intent": "visa.student"
+   },
+   {
+    "text": "با ویزای دانشجویی میشه کار کرد",
+    "intent": "visa.student"
+   },
+   {
+    "text": "هزینه‌ی بیمه‌ی درمانی ویزا",
+    "intent": "visa.student"
+   },
+   {
+    "text": "چطور خوابگاه پیدا کنم",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "خوابگاه دانشجویی داره",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "میشه اتاق خوابگاه گرفت",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "نزدیک دانشگاه کجا میشه زندگی کرد",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "هزینه‌ی خوابگاه چقدره",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "درخواست خوابگاه دانشگاه",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "راهنمای اجاره‌ی خونه",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "ثبت‌نام خوابگاه کی شروع میشه",
+    "intent": "accommodation.find"
+   },
+   {
+    "text": "چطور به وای‌فای وصل بشم",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "وای‌فای کار نمی‌کنه",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "ورود به ادوروم",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "رمزم رو فراموش کردم",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "ریست کردن رمز دانشگاه",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "نمی‌تونم وارد حسابم بشم",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "اینترنت دانشگاه قطعه",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "ایمیل دانشجویی رو چطور راه بندازم",
+    "intent": "it.wifi"
+   },
+   {
+    "text": "امتحان‌هام کی هست",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "برنامه‌ی امتحانات کجاست",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "تاریخ امتحانات",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "امتحانم ساعت چنده",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "میشه زمان امتحان رو عوض کرد",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "امتحانم رو از دست دادم",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "امتحان توی کدوم کلاسه",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "نتایج کی اعلام میشه",
+    "intent": "exams.timetable"
+   },
+   {
+    "text": "چطور واحد بگیرم",
+    "intent": "course.registration"
+   },
+   {
+    "text": "انتخاب درس‌ها",
+    "intent": "course.registration"
+   },
+   {
+    "text": "حذف و اضافه‌ی درس",
+    "intent": "course.registration"
+   },
+   {
+    "text": "مهلت انتخاب واحد",
+    "intent": "course.registration"
+   },
+   {
+    "text": "میشه رشته‌ام رو عوض کنم",
+    "intent": "course.registration"
+   },
+   {
+    "text": "ثبت‌نام در کلاس‌ها",
+    "intent": "course.registration"
+   },
+   {
+    "text": "ثبت‌نام ترم کیه",
+    "intent": "course.registration"
+   },
+   {
+    "text": "چه درس‌هایی می‌تونم بردارم",
+    "intent": "course.registration"
+   },
+   {
+    "text": "بورسیه داره",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "چطور فاند بگیرم",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "راه‌های فاند دکترا",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "دکترا فول فانده",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "مبلغ استایپند چقدره",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "بورسیه برای دانشجوهای بین‌المللی",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "چطور برای بورسیه اقدام کنم",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "استایپند می‌دن",
+    "intent": "scholarship.funding"
+   },
+   {
+    "text": "خیلی استرس دارم",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "دیگه نمی‌تونم تحمل کنم",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "همیشه اضطراب دارم",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "حال روحیم خوب نیست",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "احساس تنهایی و فشار می‌کنم",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "از استرس خوابم نمی‌بره",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "نیاز دارم با یکی حرف بزنم",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "همه چیز برام زیاده",
+    "intent": "support.wellbeing"
+   },
+   {
+    "text": "می‌خوام با یه آدم حرف بزنم",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "وصلم کن به یه کارمند",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "این کمکی نمی‌کنه یکی رو بیار",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "تماس با دفتر دانشجویی",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "شماره‌ی خدمات دانشجویی",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "ایمیل پشتیبانی",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "با یه انسان واقعی",
+    "intent": "human.handoff"
+   },
+   {
+    "text": "با مسئول مربوطه صحبت کنم",
+    "intent": "human.handoff"
+   }
+  ],
+  "answers": {
+   "greetings.hello": "سلام! در سؤال‌های دانشگاهی کمکت می‌کنم: کتابخانه، ددلاین‌ها، شهریه، ویزا، خوابگاه، اینترنت، امتحان‌ها و بورسیه. چه کمکی لازم داری؟",
+   "greetings.bye": "خداحافظ! هر وقت سؤالی داشتی برگرد.",
+   "gratitude.thanks": "خواهش می‌کنم.",
+   "bot.capabilities": "من یک دستیار ساده‌ی مبتنی بر تشخیص قصد هستم، نه انسان و نه یک مدل زبانی بزرگ. حدود ده موضوع دانشگاهی را به فارسی و انگلیسی تشخیص می‌دهم. وقتی مطمئن نیستم به‌جای حدس زدن از تو می‌پرسم، و برای مسائل شخصی یا فوری تو را به یک انسان ارجاع می‌دهم.",
+   "library.hours": "ساعت کتابخانه در هر ترم فرق می‌کند و در ایام امتحانات طولانی‌تر می‌شود. ساعت امروز و تعطیلی‌ها در سایت کتابخانه آمده است.",
+   "admissions.deadline": "ددلاین‌ها برای هر برنامه و هر دور فاند متفاوت است. صفحه‌ی پذیرش همان برنامه را ببین؛ مهلت بورسیه‌ها معمولاً زودتر از ددلاین عمومی تمام می‌شود.",
+   "fees.tuition": "شهریه به برنامه و وضعیت شهریه‌ای‌ات (داخلی یا بین‌المللی) بستگی دارد. مبلغ و امکان پرداخت قسطی در صفحه‌ی شهریه‌ی همان برنامه آمده است.",
+   "visa.student": "قوانین ویزا را دولت تعیین می‌کند و تغییر می‌کند، پس حدس نمی‌زنم. تیم مشاوره‌ی دانشجویان بین‌المللی دانشگاه می‌تواند وضعیت تو را بررسی کند؛ راهنمای رسمی در سایت ویزای دولت است.",
+   "accommodation.find": "دفتر اسکان، خوابگاه‌های دانشگاه را مدیریت می‌کند و درباره‌ی اجاره‌ی خصوصی هم راهنمایی دارد. زود اقدام کن؛ معمولاً دانشجوهای سال اول و بین‌المللی اولویت دارند.",
+   "it.wifi": "برای وای‌فای از eduroam با ایمیل کامل دانشگاه و رمزت استفاده کن. اگر رمز کار نکرد، از صفحه‌ی خدمات IT ریستش کن یا با پشتیبانی IT تماس بگیر.",
+   "exams.timetable": "برنامه‌ی امتحانات شخصی‌ات در پورتال دانشجویی است. اگر امتحانی را از دست دادی یا باید زمانش را عوض کنی، هرچه زودتر برای «شرایط خاص» با دفتر دانشکده تماس بگیر.",
+   "course.registration": "انتخاب واحد در پورتال دانشجویی و در بازه‌ی ثبت‌نام انجام می‌شود. درس‌های مجاز در راهنمای برنامه آمده و استاد راهنمایت می‌تواند تغییرات را تأیید کند.",
+   "scholarship.funding": "فاند به برنامه و وضعیت شهریه‌ای‌ات بستگی دارد. جست‌وجوی بورسیه‌ها و صفحه‌ی برنامه را ببین و قبل از اپلای مطمئن شو جایگاه، شهریه‌ی بین‌المللی را هم پوشش می‌دهد.",
+   "support.wellbeing": "متأسفم که این حس را داری. من یک ربات ساده‌ام و کمک مناسب نیستم، ولی آدم‌هایی هستند که هستند: خدمات سلامت روان دانشگاه وقت مشاوره‌ی محرمانه می‌دهد. اگر همین الان احساس ناامنی می‌کنی، با اورژانس محلی تماس بگیر.",
+   "human.handoff": "میز خدمات دانشجویی مستقیم کمکت می‌کند؛ اطلاعات تماسشان در صفحه‌ی پشتیبانی دانشجویی است."
+  },
+  "labels": {
+   "greetings.hello": "سلام",
+   "greetings.bye": "خداحافظی",
+   "gratitude.thanks": "تشکر",
+   "bot.capabilities": "توانایی‌های من",
+   "library.hours": "ساعت کتابخانه",
+   "admissions.deadline": "ددلاین اپلای",
+   "fees.tuition": "شهریه",
+   "visa.student": "ویزای دانشجویی",
+   "accommodation.find": "خوابگاه و اسکان",
+   "it.wifi": "وای‌فای و رمز",
+   "exams.timetable": "امتحانات",
+   "course.registration": "انتخاب واحد",
+   "scholarship.funding": "بورسیه و فاند",
+   "support.wellbeing": "حمایت روانی",
+   "human.handoff": "صحبت با یک انسان"
+  }
+ },
+ "policy": {
+  "answerThreshold": 0.7,
+  "clarifyThreshold": 0.45,
+  "sensitiveIntents": [
+   "support.wellbeing"
+  ],
+  "sensitiveThreshold": 0.3,
+  "handoffIntents": [
+   "human.handoff"
+  ]
+ }
 }
