@@ -1,70 +1,87 @@
 import { useState, useRef, useEffect } from 'react';
 
 const SUGGESTIONS = [
-  { label: 'when is the library open', lang: 'en' },
-  { label: 'is the phd fully funded', lang: 'en' },
-  { label: 'what is the weather tomorrow', lang: 'en' },
-  { label: 'ددلاین اپلای کیه', lang: 'fa' },
-  { label: 'خیلی استرس دارم', lang: 'fa' },
+  'when is the library open',
+  'is the phd fully funded',
+  'what is the weather tomorrow',
+  'ددلاین اپلای کیه',
+  'خیلی استرس دارم',
 ];
 
 const DECISIONS = {
-  answer: { en: 'answered', fa: 'پاسخ داده شد', color: '#4B7B62', note: 'Confidence above the answer threshold and supported by matching words.' },
-  clarify: { en: 'asked to clarify', fa: 'درخواست توضیح', color: '#C2790A', note: 'Confidence between the two thresholds, so the user chooses.' },
-  abstain: { en: 'declined to guess', fa: 'حدس نزد', color: '#8A8478', note: 'Low confidence, or no word shared with any training example.' },
-  handoff: { en: 'referred to a person', fa: 'ارجاع به انسان', color: '#7A4FB5', note: 'Sensitive or explicit request for a human.' },
+  answer: { en: 'Answered', fa: 'پاسخ داده شد', tone: 'ok' },
+  clarify: { en: 'Not sure — pick a topic', fa: 'مطمئن نیستم — یکی را انتخاب کن', tone: 'warn' },
+  abstain: { en: 'Declined to guess', fa: 'حدس نزد', tone: 'muted' },
+  handoff: { en: 'Referred to a person', fa: 'ارجاع به انسان', tone: 'human' },
+};
+
+const WHY = {
+  answer: 'Confidence passed the answer threshold and words in your message match this topic.',
+  clarify: 'Confidence fell between the two thresholds, so you choose instead of the bot guessing.',
+  abstain: 'Confidence was too low, or no word in your message matches any topic the bot knows.',
+  handoff: 'This topic is sensitive or you asked for a person, so the bot points to people instead of answering.',
 };
 
 function isPersian(text) {
   return /[\u0600-\u06FF]/.test(text);
 }
 
-function AnalysisSlip({ data, onPick }) {
+function Decision({ data, onPick }) {
+  const [open, setOpen] = useState(false);
   const d = DECISIONS[data.decision] || DECISIONS.abstain;
-  const showChoices = data.decision === 'clarify' && data.alternatives?.length > 0;
+  const fa = data.lang === 'fa';
+  const conf = Math.round((data.score || 0) * 100);
+  const alts = (data.alternatives || []).filter((a) => a.score >= 0.05);
 
   return (
-    <div className="slip">
-      <div className="slip-row">
-        <span className="slip-key">decision</span>
-        <span className="decision-chip" style={{ color: d.color, borderColor: d.color }}>
-          {data.lang === 'fa' ? d.fa : d.en}
+    <div className="meta">
+      <div className="meta-line">
+        <span className={`status ${d.tone}`}>
+          <span className="pulse" />
+          {fa ? d.fa : d.en}
         </span>
+        {!data.confirmedByUser && data.decision !== 'abstain' && (
+          <span className="conf">{conf >= 70 ? 'high' : conf >= 45 ? 'medium' : 'low'} confidence</span>
+        )}
+        {!data.confirmedByUser && (
+          <button className="why" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
+            {open ? 'Hide reasoning' : 'Why?'}
+          </button>
+        )}
       </div>
-      <p className="slip-note">{data.confirmedByUser ? 'Topic chosen by the user.' : d.note}</p>
 
-      {data.alternatives?.length > 0 && (
-        <div className="alts">
-          {data.alternatives.map((a) => (
-            <div className="slip-row" key={a.intent}>
-              <span className="slip-key alt-label" title={a.intent}>{a.label}</span>
-              <div className="meter">
-                <div className="meter-fill" style={{ width: `${Math.round(a.score * 100)}%` }} />
-                <span className="tick" style={{ left: `${data.thresholds.clarify * 100}%` }} />
-                <span className="tick strong" style={{ left: `${data.thresholds.answer * 100}%` }} />
-              </div>
-              <span className="slip-val slip-num">{Math.round(a.score * 100)}%</span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {!data.confirmedByUser && (
-        <div className="slip-row">
-          <span className="slip-key">evidence</span>
-          <span className="slip-val">
-            {data.evidence?.length ? data.evidence.join(', ') : 'no shared words'}
-          </span>
-        </div>
-      )}
-
-      {showChoices && (
+      {data.decision === 'clarify' && (
         <div className="choices">
           {data.alternatives.map((a) => (
-            <button key={a.intent} className="chip" onClick={() => onPick(a.intent, data.lang)}>
+            <button key={a.intent} className="choice" onClick={() => onPick(a.intent, data.lang)}>
               {a.label}
             </button>
           ))}
+        </div>
+      )}
+
+      {open && (
+        <div className="reasoning">
+          <p>{WHY[data.decision]}</p>
+          {alts.length > 0 && (
+            <ul className="alts">
+              {alts.map((a) => (
+                <li key={a.intent}>
+                  <span className="alt-name">{a.label}</span>
+                  <span className="track">
+                    <span className="fill" style={{ width: `${a.score * 100}%` }} />
+                    <span className="mark" style={{ left: `${data.thresholds.clarify * 100}%` }} />
+                    <span className="mark strong" style={{ left: `${data.thresholds.answer * 100}%` }} />
+                  </span>
+                  <span className="alt-num">{Math.round(a.score * 100)}%</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="evidence">
+            Matching words:{' '}
+            {data.evidence?.length ? data.evidence.map((w) => <code key={w}>{w}</code>) : <em>none</em>}
+          </p>
         </div>
       )}
     </div>
@@ -85,13 +102,10 @@ export default function Home() {
   async function sendMessage(text) {
     const trimmed = text.trim();
     if (!trimmed || loading) return;
-
-    const userMsg = { id: Date.now(), role: 'user', text: trimmed, lang: isPersian(trimmed) ? 'fa' : 'en' };
-    setMessages((prev) => [...prev, userMsg]);
+    setMessages((prev) => [...prev, { id: Date.now(), role: 'user', text: trimmed, lang: isPersian(trimmed) ? 'fa' : 'en' }]);
     setMessage('');
     setLoading(true);
     setError(null);
-
     await callEngine({ message: trimmed });
   }
 
@@ -111,10 +125,7 @@ export default function Home() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || `Server returned ${res.status}`);
-      setMessages((prev) => [
-        ...prev,
-        { id: Date.now() + 1, role: 'bot', text: data.answer, data },
-      ]);
+      setMessages((prev) => [...prev, { id: Date.now() + 1, role: 'bot', text: data.answer, data }]);
     } catch (err) {
       setError(`The engine did not respond: ${err.message}. Try again in a moment.`);
     } finally {
@@ -122,347 +133,272 @@ export default function Home() {
     }
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    sendMessage(message);
-  }
-
   return (
     <div className="page">
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Vazirmatn:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Inter:wght@400;500;600&family=Vazirmatn:wght@400;600&display=swap');
 
+        :root {
+          --bg: #07061a;
+          --surface: #110f2b;
+          --surface-2: #1a1740;
+          --line: #2b2766;
+          --text: #ecebff;
+          --muted: #8f8cc2;
+          --violet: #a855f7;
+          --blue: #3b82f6;
+          --cyan: #22d3ee;
+          --green: #34d399;
+          --amber: #fbbf24;
+          --pink: #f472b6;
+        }
         * { box-sizing: border-box; }
         html, body, #__next { height: 100%; margin: 0; }
-        body { background: #16140f; }
-      `}</style>
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
 
-      <style jsx global>{`
         .page {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding: 36px 16px 20px;
           background:
-            radial-gradient(circle at 15% 0%, rgba(196, 149, 74, 0.10), transparent 45%),
-            radial-gradient(circle at 85% 10%, rgba(79, 70, 229, 0.14), transparent 40%),
-            #16140f;
-          color: #ECE6D8;
-          font-family: 'Inter', sans-serif;
-          padding: 28px 16px 16px;
+            radial-gradient(60% 40% at 20% 0%, rgba(168, 85, 247, 0.28), transparent 70%),
+            radial-gradient(50% 40% at 90% 10%, rgba(34, 211, 238, 0.18), transparent 70%),
+            var(--bg);
         }
 
-        .header {
-          width: 100%;
-          max-width: 640px;
-          margin-bottom: 18px;
-        }
-
-
+        .header { width: 100%; max-width: 680px; margin-bottom: 22px; }
         h1 {
-          font-family: 'Fraunces', serif;
-          font-weight: 650;
-          font-size: 30px;
-          margin: 0 0 6px;
-          color: #F6F1E4;
+          font-family: 'Sora', sans-serif;
+          font-weight: 700;
+          font-size: clamp(26px, 4vw, 36px);
+          line-height: 1.15;
+          margin: 0 0 10px;
+          background: linear-gradient(90deg, #f5f3ff 0%, #c4b5fd 45%, var(--cyan) 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
         }
+        .subtitle { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; max-width: 60ch; }
 
-        .subtitle {
-          margin: 0;
-          color: #9C9486;
-          font-size: 14px;
-          line-height: 1.5;
-          max-width: 52ch;
-        }
-
-        .chat-shell {
+        .chat {
           width: 100%;
-          max-width: 640px;
+          max-width: 680px;
           flex: 1;
           display: flex;
           flex-direction: column;
-          background: #1C1A14;
-          border: 1px solid #2E2A21;
-          border-radius: 18px;
+          background: rgba(17, 15, 43, 0.82);
+          border: 1px solid var(--line);
+          border-radius: 20px;
           overflow: hidden;
-          box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.08), 0 0 60px -10px rgba(168, 85, 247, 0.35);
+          backdrop-filter: blur(8px);
         }
 
         .messages {
           flex: 1;
           overflow-y: auto;
-          padding: 22px;
+          padding: 24px;
           display: flex;
           flex-direction: column;
-          gap: 14px;
-          min-height: 380px;
-          max-height: 56vh;
+          gap: 16px;
+          min-height: 400px;
+          max-height: 60vh;
+          scrollbar-color: var(--line) transparent;
         }
+        .empty { margin: auto; text-align: center; color: var(--muted); font-size: 14px; max-width: 38ch; line-height: 1.6; }
 
-        .empty-state {
-          margin: auto;
-          text-align: center;
-          color: #6F6859;
-          font-size: 13px;
-          max-width: 36ch;
-        }
-
-        .row {
-          display: flex;
-          flex-direction: column;
-          max-width: 86%;
-        }
+        .row { display: flex; flex-direction: column; max-width: 84%; gap: 6px; }
         .row.user { align-self: flex-end; align-items: flex-end; }
         .row.bot { align-self: flex-start; align-items: flex-start; }
 
-        .bubble {
-          padding: 10px 14px;
-          border-radius: 14px;
-          font-size: 14.5px;
-          line-height: 1.5;
-          word-break: break-word;
-        }
-
+        .bubble { padding: 11px 15px; border-radius: 16px; font-size: 15px; line-height: 1.55; word-break: break-word; }
         .bubble.user {
-          background: #4F46E5;
+          background: linear-gradient(135deg, var(--violet), var(--blue));
           color: #fff;
-          border-bottom-right-radius: 4px;
+          border-bottom-right-radius: 5px;
+          box-shadow: 0 6px 24px -8px rgba(124, 58, 237, 0.7);
         }
-        .bubble.user.rtl {
-          border-bottom-right-radius: 14px;
-          border-bottom-left-radius: 4px;
+        .bubble.bot { background: var(--surface-2); border: 1px solid var(--line); border-bottom-left-radius: 5px; }
+        .rtl { direction: rtl; text-align: right; font-family: 'Vazirmatn', sans-serif; }
+        .bubble.user.rtl { border-bottom-right-radius: 16px; border-bottom-left-radius: 5px; }
+        .bubble.bot.rtl { border-bottom-left-radius: 16px; border-bottom-right-radius: 5px; }
+
+        .meta { font-size: 12.5px; color: var(--muted); width: 100%; }
+        .meta-line { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .status { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+        .pulse { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+        .status.ok { color: var(--green); }
+        .status.warn { color: var(--amber); }
+        .status.muted { color: var(--muted); }
+        .status.human { color: var(--pink); }
+        .conf { color: var(--muted); }
+        .why {
+          background: none;
+          border: none;
+          color: var(--cyan);
+          font: inherit;
+          cursor: pointer;
+          padding: 0;
+          text-decoration: underline;
+          text-underline-offset: 3px;
         }
 
-        .bubble.bot {
-          background: #2A271E;
-          color: #EFE9DA;
-          border-bottom-left-radius: 4px;
-        }
-        .bubble.bot.rtl {
-          border-bottom-left-radius: 14px;
-          border-bottom-right-radius: 4px;
-        }
-
-        .rtl { direction: rtl; font-family: 'Vazirmatn', sans-serif; text-align: right; }
-
-        /* the analysis slip — printed readout under each bot reply */
-        .slip {
-          margin-top: 6px;
-          width: 100%;
-          background: #F6F1E4;
-          color: #2A2620;
-          border-radius: 2px;
-          padding: 10px 12px 8px;
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 11px;
-          position: relative;
-        }
-        .slip::before {
-          content: '';
-          position: absolute;
-          top: -1px; left: 0; right: 0;
-          height: 6px;
-          background-image: radial-gradient(circle, #16140f 2.5px, transparent 2.6px);
-          background-size: 12px 12px;
-          background-position: 0 -6px;
-        }
-
-        .slip-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 2px 0;
-        }
-        .slip-key {
-          color: #8A8167;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          width: 72px;
-          flex-shrink: 0;
-        }
-        .slip-val { font-weight: 600; }
-        .slip-num { width: 36px; text-align: right; }
-
-        .meter {
-          flex: 1;
-          height: 5px;
-          background: #E2DAC4;
-          border-radius: 3px;
-          overflow: hidden;
-        }
-        .meter-fill {
-          height: 100%;
-          background: #C2790A;
-        }
-
-        .slip-note { margin: 2px 0 6px; color: #8A8167; font-size: 10.5px; line-height: 1.4; }
-        .alt-label { text-transform: none; letter-spacing: 0; width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .meter { position: relative; }
-        .tick { position: absolute; top: -2px; bottom: -2px; width: 1px; background: #8A8167; opacity: 0.5; }
-        .tick.strong { opacity: 1; background: #2A2620; }
-        .choices { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-        .choices .chip { background: #2A2620; color: #F6F1E4; border-color: #2A2620; font-size: 11px; }
-        .decision-chip {
-          border: 1px solid;
-          border-radius: 999px;
-          padding: 1px 8px;
-          font-size: 10.5px;
-          font-weight: 600;
-        }
-        .chip:focus-visible, .send-btn:focus-visible { outline: 2px solid #C2956C; outline-offset: 2px; }
-
-        .sentiment-chip {
-          border: 1px solid;
-          border-radius: 999px;
-          padding: 1px 8px;
-          font-size: 10.5px;
-        }
-
-        .typing {
-          align-self: flex-start;
-          display: flex;
-          gap: 4px;
-          padding: 12px 14px;
-          background: #2A271E;
-          border-radius: 14px;
-          border-bottom-left-radius: 4px;
-        }
-        .dot {
-          width: 6px; height: 6px; border-radius: 50%;
-          background: #8A8167;
-          animation: bounce 1.1s infinite ease-in-out;
-        }
-        .dot:nth-child(2) { animation-delay: 0.15s; }
-        .dot:nth-child(3) { animation-delay: 0.3s; }
-        @keyframes bounce {
-          0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-          30% { transform: translateY(-4px); opacity: 1; }
-        }
-
-        .suggestions {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-          padding: 0 18px 14px;
-        }
-        .chip {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 12px;
-          background: #2A271E;
-          border: 1px solid #3A362B;
-          color: #C9C2AE;
-          padding: 6px 11px;
+        .choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .choice, .chip {
+          font: inherit;
+          font-size: 13px;
+          color: var(--text);
+          background: rgba(168, 85, 247, 0.12);
+          border: 1px solid rgba(168, 85, 247, 0.5);
+          padding: 7px 13px;
           border-radius: 999px;
           cursor: pointer;
+          transition: box-shadow 0.15s, border-color 0.15s;
         }
-        .chip:hover { border-color: #C2956C; color: #F6F1E4; }
+        .choice:hover, .chip:hover { border-color: var(--cyan); box-shadow: 0 0 14px -2px rgba(34, 211, 238, 0.6); }
 
-        .composer {
-          display: flex;
-          gap: 8px;
-          padding: 14px;
-          border-top: 1px solid #2E2A21;
-          background: #1C1A14;
+        .reasoning {
+          margin-top: 8px;
+          padding: 12px 14px;
+          background: var(--surface);
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          max-width: 460px;
         }
+        .reasoning p { margin: 0 0 10px; line-height: 1.5; }
+        .alts { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 7px; }
+        .alts li { display: grid; grid-template-columns: 140px 1fr 38px; align-items: center; gap: 10px; }
+        .alt-name { color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .track { position: relative; height: 6px; background: var(--surface-2); border-radius: 3px; }
+        .fill { position: absolute; inset: 0 auto 0 0; border-radius: 3px; background: linear-gradient(90deg, var(--violet), var(--cyan)); }
+        .mark { position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--muted); opacity: 0.6; }
+        .mark.strong { background: var(--text); opacity: 0.9; }
+        .alt-num { text-align: right; color: var(--text); font-variant-numeric: tabular-nums; }
+        .evidence { margin: 0 !important; }
+        .evidence code {
+          font-family: inherit;
+          color: var(--cyan);
+          background: rgba(34, 211, 238, 0.1);
+          padding: 1px 6px;
+          border-radius: 6px;
+          margin-right: 4px;
+        }
+
+        .typing { align-self: flex-start; display: flex; gap: 5px; padding: 13px 15px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 16px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet); animation: bounce 1.1s infinite ease-in-out; }
+        .dot:nth-child(2) { animation-delay: 0.15s; background: #8b7cf6; }
+        .dot:nth-child(3) { animation-delay: 0.3s; background: var(--cyan); }
+        @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+        .suggestions { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 16px; }
+
+        .composer { display: flex; gap: 10px; padding: 14px; border-top: 1px solid var(--line); }
         .composer input {
           flex: 1;
-          background: #16140f;
-          border: 1px solid #2E2A21;
-          color: #ECE6D8;
-          border-radius: 10px;
-          padding: 11px 14px;
-          font-size: 14px;
+          background: var(--bg);
+          border: 1px solid var(--line);
+          color: var(--text);
+          border-radius: 12px;
+          padding: 12px 15px;
+          font: inherit;
+          font-size: 15px;
           outline: none;
-          font-family: inherit;
         }
-        .composer input::placeholder { color: #5F584A; }
-        .composer input:focus { border-color: #4F46E5; }
-        .composer input.rtl { direction: rtl; font-family: 'Vazirmatn', sans-serif; }
-
-        .send-btn {
-          background: #4F46E5;
+        .composer input::placeholder { color: #5d5a8f; }
+        .composer input:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25); }
+        .composer input.rtl { font-family: 'Vazirmatn', sans-serif; }
+        .send {
+          background: linear-gradient(135deg, var(--violet), var(--blue));
           color: #fff;
           border: none;
-          border-radius: 10px;
-          padding: 0 18px;
-          font-size: 14px;
+          border-radius: 12px;
+          padding: 0 22px;
+          font: inherit;
           font-weight: 600;
           cursor: pointer;
+          box-shadow: 0 0 20px -6px rgba(168, 85, 247, 0.9);
         }
-        .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .send-btn:not(:disabled):hover { background: #4338CA; }
+        .send:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
 
-        .error-banner {
-          margin: 10px 18px 0;
-          font-size: 12.5px;
-          color: #E2A98A;
-          font-family: 'JetBrains Mono', monospace;
+        .why:focus-visible, .choice:focus-visible, .chip:focus-visible, .send:focus-visible {
+          outline: 2px solid var(--cyan);
+          outline-offset: 2px;
         }
+        .error { margin: 10px 20px 0; font-size: 13px; color: #fca5a5; }
 
-        @media (prefers-reduced-motion: reduce) {
-          .dot { animation: none; }
+        @media (max-width: 560px) {
+          .row { max-width: 94%; }
+          .alts li { grid-template-columns: 100px 1fr 34px; }
         }
+        @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
       `}</style>
 
-      <div className="header">
-        <h1>A campus assistant that knows when it doesn't know</h1>
+      <header className="header">
+        <h1>A campus assistant that knows when it doesn&apos;t know</h1>
         <p className="subtitle">
-          Ask about the library, deadlines, fees, visas, housing, Wi-Fi, exams or funding, in
-          English or Persian. Each reply shows its decision: answer, ask you to choose, decline
-          to guess, or refer you to a person. The marks on each bar are the two thresholds.
+          Ask about the library, deadlines, fees, visas, housing, Wi-Fi, exams or funding, in English
+          or Persian. When it isn&apos;t sure, it asks you to choose; when a question is off-topic, it
+          says so instead of guessing.
         </p>
-      </div>
+      </header>
 
-      <div className="chat-shell">
+      <main className="chat">
         <div className="messages" ref={scrollRef}>
           {messages.length === 0 && (
-            <div className="empty-state">
-              Try a question below, including one that is off-topic, to see the bot decline.
-            </div>
+            <div className="empty">Try a question below — including the off-topic one, to see the bot decline.</div>
           )}
 
           {messages.map((m) => {
-            const rtl = m.lang === 'fa' || (m.data && m.data.lang === 'fa');
+            const rtl = m.lang === 'fa' || m.data?.lang === 'fa';
             return (
               <div key={m.id} className={`row ${m.role}`}>
                 <div className={`bubble ${m.role} ${rtl ? 'rtl' : ''}`}>{m.text}</div>
-                {m.role === 'bot' && m.data && <AnalysisSlip data={m.data} onPick={pickIntent} />}
+                {m.role === 'bot' && m.data && <Decision data={m.data} onPick={pickIntent} />}
               </div>
             );
           })}
 
           {loading && (
-            <div className="typing">
+            <div className="typing" aria-label="Thinking">
               <span className="dot" /><span className="dot" /><span className="dot" />
             </div>
           )}
         </div>
 
-        {error && <div className="error-banner">⚠ {error}</div>}
+        {error && <div className="error">{error}</div>}
 
         {messages.length === 0 && (
           <div className="suggestions">
             {SUGGESTIONS.map((s) => (
-              <button key={s.label} className="chip" onClick={() => sendMessage(s.label)}>
-                {s.label}
+              <button key={s} className={`chip ${isPersian(s) ? 'rtl' : ''}`} onClick={() => sendMessage(s)}>
+                {s}
               </button>
             ))}
           </div>
         )}
 
-        <form className="composer" onSubmit={handleSubmit}>
+        <form
+          className="composer"
+          onSubmit={(e) => {
+            e.preventDefault();
+            sendMessage(message);
+          }}
+        >
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type in English or فارسی..."
+            placeholder="Type in English or فارسی…"
+            aria-label="Message"
             className={isPersian(message) ? 'rtl' : ''}
           />
-          <button type="submit" className="send-btn" disabled={loading || !message.trim()}>
+          <button type="submit" className="send" disabled={loading || !message.trim()}>
             Send
           </button>
         </form>
-      </div>
+      </main>
     </div>
   );
 }
