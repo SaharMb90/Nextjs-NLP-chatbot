@@ -480,6 +480,70 @@
    {
     "text": "real person please",
     "intent": "human.handoff"
+   },
+   {
+    "text": "where is the library",
+    "intent": "library.location"
+   },
+   {
+    "text": "how do i get to the library",
+    "intent": "library.location"
+   },
+   {
+    "text": "library address",
+    "intent": "library.location"
+   },
+   {
+    "text": "which building is the library in",
+    "intent": "library.location"
+   },
+   {
+    "text": "is there a library near the informatics building",
+    "intent": "library.location"
+   },
+   {
+    "text": "directions to the main library",
+    "intent": "library.location"
+   },
+   {
+    "text": "find the library on the map",
+    "intent": "library.location"
+   },
+   {
+    "text": "where can i find the library",
+    "intent": "library.location"
+   },
+   {
+    "text": "where is the student centre",
+    "intent": "campus.location"
+   },
+   {
+    "text": "how do i find a building",
+    "intent": "campus.location"
+   },
+   {
+    "text": "campus map",
+    "intent": "campus.location"
+   },
+   {
+    "text": "where is the informatics forum",
+    "intent": "campus.location"
+   },
+   {
+    "text": "where is room 4.31",
+    "intent": "campus.location"
+   },
+   {
+    "text": "directions to the main campus",
+    "intent": "campus.location"
+   },
+   {
+    "text": "which building is my lecture in",
+    "intent": "campus.location"
+   },
+   {
+    "text": "where is the canteen",
+    "intent": "campus.location"
    }
   ],
   "answers": {
@@ -497,7 +561,9 @@
    "course.registration": "Course selection happens in the student portal during the enrolment window. Your programme handbook lists which courses you can take; your personal tutor can approve changes.",
    "scholarship.funding": "Funding depends on the programme and your fee status. Check the scholarships search and the programme page, and confirm whether a place covers international fees before you apply.",
    "support.wellbeing": "I'm sorry it feels like this. I'm a simple bot and not the right support, but people are: the university wellbeing service offers confidential appointments. If you feel unsafe right now, contact local emergency services.",
-   "human.handoff": "The student services desk can help directly; their contact details are on the student support page."
+   "human.handoff": "The student services desk can help directly; their contact details are on the student support page.",
+   "library.location": "The main library's location and the subject libraries are marked on the campus map; search for \"library\" there for directions.",
+   "campus.location": "The interactive campus map shows every building and room; your lecture rooms are also listed in your timetable."
   },
   "labels": {
    "greetings.hello": "Greeting",
@@ -514,7 +580,9 @@
    "course.registration": "Course registration",
    "scholarship.funding": "Scholarships and funding",
    "support.wellbeing": "Wellbeing support",
-   "human.handoff": "Talk to a person"
+   "human.handoff": "Talk to a person",
+   "library.location": "Library location",
+   "campus.location": "Campus locations"
   }
  },
  "fa": {
@@ -998,6 +1066,70 @@
    {
     "text": "با مسئول مربوطه صحبت کنم",
     "intent": "human.handoff"
+   },
+   {
+    "text": "کتابخانه کجاست",
+    "intent": "library.location"
+   },
+   {
+    "text": "چطور برم کتابخانه",
+    "intent": "library.location"
+   },
+   {
+    "text": "آدرس کتابخانه",
+    "intent": "library.location"
+   },
+   {
+    "text": "کتابخانه توی کدوم ساختمونه",
+    "intent": "library.location"
+   },
+   {
+    "text": "نزدیک دانشکده کتابخانه هست",
+    "intent": "library.location"
+   },
+   {
+    "text": "مسیر کتابخانه مرکزی",
+    "intent": "library.location"
+   },
+   {
+    "text": "کتابخانه رو روی نقشه نشونم بده",
+    "intent": "library.location"
+   },
+   {
+    "text": "کتابخانه رو کجا پیدا کنم",
+    "intent": "library.location"
+   },
+   {
+    "text": "مرکز دانشجویی کجاست",
+    "intent": "campus.location"
+   },
+   {
+    "text": "چطور یه ساختمون رو پیدا کنم",
+    "intent": "campus.location"
+   },
+   {
+    "text": "نقشه‌ی دانشگاه",
+    "intent": "campus.location"
+   },
+   {
+    "text": "ساختمان انفورماتیک کجاست",
+    "intent": "campus.location"
+   },
+   {
+    "text": "کلاس ۴.۳۱ کجاست",
+    "intent": "campus.location"
+   },
+   {
+    "text": "مسیر پردیس اصلی",
+    "intent": "campus.location"
+   },
+   {
+    "text": "کلاسم توی کدوم ساختمونه",
+    "intent": "campus.location"
+   },
+   {
+    "text": "سلف کجاست",
+    "intent": "campus.location"
    }
   ],
   "answers": {
@@ -1015,7 +1147,9 @@
    "course.registration": "انتخاب واحد در پورتال دانشجویی و در بازه‌ی ثبت‌نام انجام می‌شود. درس‌های مجاز در راهنمای برنامه آمده و استاد راهنمایت می‌تواند تغییرات را تأیید کند.",
    "scholarship.funding": "فاند به برنامه و وضعیت شهریه‌ای‌ات بستگی دارد. جست‌وجوی بورسیه‌ها و صفحه‌ی برنامه را ببین و قبل از اپلای مطمئن شو جایگاه، شهریه‌ی بین‌المللی را هم پوشش می‌دهد.",
    "support.wellbeing": "متأسفم که این حس را داری. من یک ربات ساده‌ام و کمک مناسب نیستم، ولی آدم‌هایی هستند که هستند: خدمات سلامت روان دانشگاه وقت مشاوره‌ی محرمانه می‌دهد. اگر همین الان احساس ناامنی می‌کنی، با اورژانس محلی تماس بگیر.",
-   "human.handoff": "میز خدمات دانشجویی مستقیم کمکت می‌کند؛ اطلاعات تماسشان در صفحه‌ی پشتیبانی دانشجویی است."
+   "human.handoff": "میز خدمات دانشجویی مستقیم کمکت می‌کند؛ اطلاعات تماسشان در صفحه‌ی پشتیبانی دانشجویی است.",
+   "library.location": "مکان کتابخانه‌ی مرکزی و کتابخانه‌های دانشکده‌ها روی نقشه‌ی دانشگاه مشخص است؛ آنجا «کتابخانه» را جست‌وجو کن تا مسیر را ببینی.",
+   "campus.location": "نقشه‌ی تعاملی دانشگاه همه‌ی ساختمان‌ها و کلاس‌ها را نشان می‌دهد؛ کلاس‌هایت هم در برنامه‌ی درسی‌ات آمده است."
   },
   "labels": {
    "greetings.hello": "سلام",
@@ -1032,7 +1166,9 @@
    "course.registration": "انتخاب واحد",
    "scholarship.funding": "بورسیه و فاند",
    "support.wellbeing": "حمایت روانی",
-   "human.handoff": "صحبت با یک انسان"
+   "human.handoff": "صحبت با یک انسان",
+   "library.location": "مکان کتابخانه",
+   "campus.location": "مکان‌ها در دانشگاه"
   }
  },
  "policy": {

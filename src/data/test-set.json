@@ -117,6 +117,14 @@
    "intent": "human.handoff"
   },
   {
+   "text": "where's the library?",
+   "intent": "library.location"
+  },
+  {
+   "text": "how do i find the student centre",
+   "intent": "campus.location"
+  },
+  {
    "text": "what's the weather tomorrow",
    "intent": null
   },
@@ -257,6 +265,14 @@
   {
    "text": "چطور با خدمات دانشجویی تماس بگیرم",
    "intent": "human.handoff"
+  },
+  {
+   "text": "کتابخونه کجاست",
+   "intent": "library.location"
+  },
+  {
+   "text": "ساختمون مرکز دانشجویی کجاست",
+   "intent": "campus.location"
   },
   {
    "text": "هوای فردا چطوره",

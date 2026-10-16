@@ -23,22 +23,22 @@ The classifier's scores are normalised across known intents, so text the bot was
 
 ## Evaluation
 
-Held-out test set: 29 in-scope and 6 out-of-scope queries per language, phrased differently from the training data (`src/data/test-set.json`). Run `npm run evaluate`.
+Held-out test set: 31 in-scope and 6 out-of-scope queries per language, phrased differently from the training data (`src/data/test-set.json`). Run `npm run evaluate`.
 
 | Metric | English: confidence only | English: + evidence check | Persian: confidence only | Persian: + evidence check |
 | --- | --- | --- | --- | --- |
-| Top-1 accuracy (in-scope) | 90% | 90% | 97% | 97% |
-| Coverage (answered or handed off) | 86% | 83% | 90% | 90% |
-| Accuracy on answered queries | 100% | 100% | 100% | 100% |
+| Top-1 accuracy (in-scope) | 87% | 87% | 97% | 97% |
+| Coverage (answered or handed off) | 84% | 81% | 90% | 87% |
+| Accuracy on answered queries | 100% | 100% | 96% | 100% |
 | Out-of-scope queries declined or clarified | 33% | 100% | 50% | 100% |
 | Wellbeing queries routed to a person | 100% | 100% | 100% | 100% |
-| Expected calibration error (lower is better) | 0.096 | 0.096 | 0.089 | 0.089 |
+| Expected calibration error (lower is better) | 0.085 | 0.085 | 0.096 | 0.096 |
 
-**Limitations, stated plainly.** The test set is small (70 queries), so each percentage point carries wide uncertainty. The stopword list was adjusted after inspecting errors on this test set, so the out-of-scope figures are optimistic; a fresh test set is needed for an unbiased estimate. Bot answers are deliberately generic and point to official sources rather than inventing dates, fees or visa rules.
+**Limitations, stated plainly.** High confidence can still be wrong: before location intents were added, "where is the library?" was answered with library opening hours at 100% confidence, because the only intent containing "library" was about hours. The evidence check cannot catch a wrong intent that shares words with the right one; it only catches off-topic input. The test set is small (74 queries), so each percentage point carries wide uncertainty. The stopword list was adjusted after inspecting errors on this test set, so the out-of-scope figures are optimistic; a fresh test set is needed for an unbiased estimate. Bot answers are deliberately generic and point to official sources rather than inventing dates, fees or visa rules.
 
 ## Data
 
-240 training utterances across 15 intents (8 per intent per language), including greetings, library, deadlines, fees, visas, accommodation, IT, exams, course registration, funding, wellbeing and human handoff. Persian examples use informal spoken forms as well as written ones.
+272 training utterances across 17 intents (8 per intent per language), including greetings, library hours and location, campus locations, deadlines, fees, visas, accommodation, IT, exams, course registration, funding, wellbeing and human handoff. Persian examples use informal spoken forms as well as written ones.
 
 ## Run locally
 
